@@ -2,11 +2,11 @@ use Northwind;
 
 --------------------
 --                --
---  NA ZAJÊCIACH  --
+--  NA ZAJÄ˜CIACH  --
 --                --
 --------------------
 
--- jaki klient nie zrealizowa³ zamówienia?
+-- jaki klient nie zrealizowaÅ‚ zamÃ³wienia
 
 select
 	c.CompanyName
@@ -28,7 +28,7 @@ where c.CustomerID not in (
 go
 
 
--- z jakiej kat. nie mamy produktów?
+-- z jakiej kat. nie mamy produktÃ³w
 
 select
 	c.CategoryName
@@ -39,7 +39,7 @@ where p.ProductID is null
 ;
 
 
--- jaki pracownik nie ma nad sob¹ szefa?
+-- jaki pracownik nie ma nad sobÄ… szefa
 
 select
 	concat_ws( ' ', e1.FirstName, e1.LastName ) as [Name]
@@ -56,7 +56,7 @@ where e.ReportsTo is null
 ;
 
 
--- jaka jest œrednia cena produktów, cena min, maks, liczba ró¿nych produktów
+-- jaka jest Å›rednia cena produktÃ³w, cena min, maks, liczba rÃ³Å¼nych produktÃ³w
 
 select
 	avg( p.UnitPrice ) Mean_Average
@@ -71,7 +71,7 @@ from Products p
 go
 
 
--- jakie produkty maj¹ cenê wiêksz¹ od œredniej ceny wszystkich produktów
+-- jakie produkty majÄ… cenÄ™ wiÄ™kszÄ… od Å›redniej ceny wszystkich produktÃ³w
 
 select
 	p.ProductName
@@ -85,7 +85,7 @@ where p.UnitPrice > (
 go
 
 
--- jaka jest wartoœæ produktów z danych kategorii
+-- jaka jest wartoÅ›Ä‡ produktÃ³w z danych kategorii
 
 select
 	c.CategoryName
@@ -98,7 +98,7 @@ group by c.CategoryName
 go
 
 
--- jaka jest œrednia cena produktów, cena min, maks, liczba ró¿nych produktów w danych kategoriach
+-- jaka jest Å›rednia cena produktÃ³w, cena min, maks, liczba rÃ³Å¼nych produktÃ³w w danych kategoriach
 
 select
 	c.CategoryName
@@ -115,7 +115,7 @@ group by CategoryName
 go
 
 
--- jw. ale gdzie iloœæ ró¿nych produktów > 5
+-- jw. ale gdzie iloÅ›Ä‡ rÃ³Å¼nych produktÃ³w > 5
 
 select
 	c.CategoryName
@@ -133,7 +133,7 @@ having count( * ) > 5
 go
 
 
--- jw. ale gdzie iloœæ danego produktu > 10
+-- jw. ale gdzie iloÅ›Ä‡ danego produktu > 10
 
 select
 	c.CategoryName
@@ -152,7 +152,7 @@ having count( * ) > 5
 go
 
 
--- jakie zamówienia opiewaj¹ na jak¹ wartoœæ
+-- jakie zamÃ³wienia opiewajÄ… na jakÄ… wartoÅ›Ä‡
 
 select
 	od.OrderID
@@ -164,7 +164,7 @@ order by Order_Value
 go
 
 
--- jakie zamówienie opiewa na najwy¿sz¹ wartoœæ
+-- jakie zamÃ³wienie opiewa na najwyÅ¼szÄ… wartoÅ›Ä‡
 
 select top 1
 	od.OrderID
@@ -175,7 +175,7 @@ order by Order_Value desc
 ;
 go
 
--- znaleŸæ najtañszy i najdro¿szy produkt
+-- znaleÅºÄ‡ najtaÅ„szy i najdroÅ¼szy produkt
 
 select
 	p.ProductName
@@ -193,7 +193,7 @@ inner join (
 go
 
 
--- jw. kto dostarczy³ i do jakiej kategorii nale¿y
+-- jw. kto dostarczyÄ‡ i do jakiej kategorii naleÅ¼y
 
 select
 	p.ProductName
@@ -223,7 +223,7 @@ go
 ------------------
 
 ------------------------
--- £¹czenie tabel cd. --
+-- Å‚Ä…czenie tabel cd. --
 ------------------------
 
 -- Wykonaj dwa polecenia
@@ -237,10 +237,10 @@ insert into Products (
 ) values (
 	'P1'
 );
--- czy wykonuj¹c zapytanie widzimy wprowadzone rekordy ?
+-- czy wykonujÄ…c zapytanie widzimy wprowadzone rekordy
 /*
-Nie, widzimy jedynie liczbê zmodyfikowanych / wstawionych rekordów
-(ka¿de polecienie insert wyœwietla oddzielnie liczbê 
+Nie, widzimy jedynie liczbÄ™ zmodyfikowanych / wstawionych rekordÃ³w
+(kaÅ¼de polecienie insert wyÅ›wietla oddzielnie liczbÄ™ 
 */
 
 select 
@@ -252,8 +252,8 @@ inner join Products p
  	on c.CategoryID = p.CategoryID
 ;
 
--- Podaj nazwê produktu, jego cenê i nazwê kategorii z tabel Products i Categories.
-	-- chcemy tak¿e wyœwietliæ wszystkie nazwy kategorii nawet te przez przypisanych produktów 
+-- Podaj nazwÄ™ produktu, jego cenÄ™ i nazwÄ™ kategorii z tabel Products i Categories.
+	-- chcemy takÅ¼e wyÅ›wietliÄ‡ wszystkie nazwy kategorii nawet te przez przypisanych produktÃ³w 
 select 
 	p.ProductName
 	, p.UnitPrice
@@ -263,8 +263,8 @@ left join Products p   -- left outer join
 	on c.CategoryID = p.CategoryID
 ;
 
--- Podaj nazwê produktu, jego cenê i nazwê kategorii z tabel Products i Categories.
-	-- chcemy tak¿e wyœwietliæ wszystkie produkty nawet bez przypisanej kategorii 
+-- Podaj nazwÄ™ produktu, jego cenÄ™ i nazwÄ™ kategorii z tabel Products i Categories.
+	-- chcemy takÅ¼e wyÅ›wietliÄ‡ wszystkie produkty nawet bez przypisanej kategorii 
 select 
 	p.ProductName
 	, p.UnitPrice
@@ -274,8 +274,8 @@ right join Products p   --right outer join
 	on c.CategoryID = p.CategoryID
 ;
 
--- Podaj nazwê produktu, jego cenê i nazwê kategorii z tabel Products i Categories.
-	-- chcemy tak¿e wyœwietliæ wszystkie produkty i wszystkie kategorie 
+-- Podaj nazwÄ™ produktu, jego cenÄ™ i nazwÄ™ kategorii z tabel Products i Categories.
+	-- chcemy takÅ¼e wyÅ›wietliÄ‡ wszystkie produkty i wszystkie kategorie 
 select 
 	p.ProductName
 	, p.UnitPrice
@@ -286,7 +286,7 @@ full outer join Products p  --full outer join
 ;
 
 
--- 1.Podaj nazwy kategorii, które nie maj¹ przypisanych produktów.
+-- 1.Podaj nazwy kategorii, ktÃ³re nie majÄ… przypisanych produktÃ³w.
 
 select
 	c.CategoryName
@@ -298,7 +298,7 @@ where p.ProductID is null
 go
 
 
--- 2.Podaj nazwy produktów, które nie maj¹ przypisanej kategorii (z wykorzystaniem JOIN'a) 
+-- 2.Podaj nazwy produktÃ³w, ktÃ³re nie majÄ… przypisanej kategorii (z wykorzystaniem JOIN'a) 
 
 select
 	p.ProductName
@@ -310,7 +310,7 @@ where c.CategoryID is null
 go
 
 
--- 3.Podaj nazwy produktów, które nie maj¹ przypisanej kategorii (bez wykorzystania JOIN'a) 
+-- 3.Podaj nazwy produktÃ³w, ktÃ³re nie majÄ… przypisanej kategorii (bez wykorzystania JOIN'a) 
 
 select
 	p.ProductName
@@ -321,8 +321,8 @@ where p.CategoryID is null
 go
 
 
--- 4. Podaj nazwê produktu, jego cenê i nazwê kategorii z tabel Products i Categories.
-	-- chcemy tak¿e wyœwietliæ wszystkie produkty i wszystkie kategorie 
+-- 4. Podaj nazwÄ™ produktu, jego cenÄ™ i nazwÄ™ kategorii z tabel Products i Categories.
+	-- chcemy takÅ¼e wyÅ›wietliÄ‡ wszystkie produkty i wszystkie kategorie 
 
 select
 	p.ProductName
@@ -335,7 +335,7 @@ full outer join Categories c
 go
 
 
--- 5. Z tabeli Employees podaj nazwisko pracownika i nazwisko jego szefa (wykorzystaæ pole ReportsTo) - zale¿noœci s³u¿bowe
+-- 5. Z tabeli Employees podaj nazwisko pracownika i nazwisko jego szefa (wykorzystaÄ‡ pole ReportsTo) - zaleÅ¼noÅ›ci sÅ‚uÅ¼bowe
 
 select
 	e1.LastName
@@ -347,7 +347,7 @@ inner join Employees e2
 go
 
 
--- 6. Z tabeli Employees podaj nazwiska wszystkich pracowników i nazwisko ich szefa (wykorzystaæ pole ReportsTo) - zale¿noœci s³u¿bowe
+-- 6. Z tabeli Employees podaj nazwiska wszystkich pracownikÃ³w i nazwisko ich szefa (wykorzystaÄ‡ pole ReportsTo) - zaleÅ¼noÅ›ci sÅ‚uÅ¼bowe
 
 select
 	e1.LastName
@@ -358,7 +358,7 @@ left join Employees e2
 ;
 go
 
--- 7. Podaj nazwiska pracowników, którzy nie maj¹ szefa
+-- 7. Podaj nazwiska pracownikÃ³w, ktÃ³rzy nie majÄ… szefa
 
 select
 	e1.LastName
@@ -367,7 +367,7 @@ where ReportsTo is null
 ;
 go
 
--- 8. Podaj nazwê klienta i nazwy produktów, które kupowa³ (bez powtórzeñ) 
+-- 8. Podaj nazwÄ™ klienta i nazwy produktÃ³w, ktÃ³re kupowaÄ‡ (bez powtÃ³rzeÅ„) 
 
 select distinct
 	c.CompanyName
@@ -382,7 +382,7 @@ inner join Products p
 ;
 go
 
-	--dla konkretnego jednego klienta o nazwie 'Wolski  Zajazd' (zapytanie powinno zwróciæ kilka rekordów)
+	--dla konkretnego jednego klienta o nazwie 'Wolski  Zajazd' (zapytanie powinno zwrÃ³ciÄ‡ kilka rekordÃ³w)
 select distinct
 	c.CompanyName
 	, p.ProductName
@@ -397,7 +397,7 @@ where c.CompanyName = 'Wolski  Zajazd'
 ;
 go
 
--- 9. Podaj nazwê dostwacy(Suppliers) i nazwê spedytorów (Shippers), którzy dostarczaj¹ produkty danego dostwcy. Podaj tak¿e kraj pochodzenia dostwacy 
+-- 9. Podaj nazwÄ™ dostwacy(Suppliers) i nazwÄ™ spedytorÃ³w (Shippers), ktÃ³rzy dostarczajÄ… produkty danego dostwcy. Podaj takÅ¼e kraj pochodzenia dostwacy 
 
 select distinct
 	s.CompanyName as SupplierName
@@ -415,7 +415,7 @@ left join Shippers sh
 ;
 go
 
---10. Podaj numer zamówienia i nazwê towarów sprzedanych na kazdym z nich, w jakiej iloœci i po jakiej cenie
+--10. Podaj numer zamÃ³wienia i nazwÄ™ towarÃ³w sprzedanych na kazdym z nich, w jakiej iloÅ›ci i po jakiej cenie
 select
 	o.OrderID
 	, p.ProductName
@@ -429,7 +429,7 @@ inner join Products p
 ;
 go
 
---11. Podaj nazwisko pracowników, którzy nie s¹ jednoczeœnie szefami dla innych pracowników.
+--11. Podaj nazwisko pracownikÃ³w, ktÃ³rzy nie sÄ… jednoczeÅ›nie szefami dla innych pracownikÃ³w.
 select e1.LastName
 from Employees e1
 left join Employees e2
@@ -448,7 +448,7 @@ where not exists (
 ;
 go
 
---12. ZnaleŸæ pracowników, którzy maj¹ szefa jako samego siebie (dodaj pracownika, który ma szefa jako siebie samego) bez klauzli WHERE
+--12. ZnaleÅºÄ‡ pracownikÃ³w, ktÃ³rzy majÄ… szefa jako samego siebie (dodaj pracownika, ktÃ³ry ma szefa jako siebie samego) bez klauzli WHERE
 
 insert into Employees (
 	LastName
@@ -481,35 +481,35 @@ inner join ( select null nothing ) n
 ;
 go
 
--- kolejnoœæ join'ów typu outer w zapytaniu ma znaczenie przy zapytaniach ze sprze¿eniami zewnêtrznymi, gdy jest wiêcej ni¿ dwie tabele
--- (z poprzednich æwiczeñ mamy przynajmniej jedn¹ kategoriê i produkt nie powi¹zany ze sob¹)
--- sprawdziæ iloœæ zwracanych rekordów i dane które s¹ zwracane
+-- kolejnoÅ›Ä‡ join'Ã³w typu outer w zapytaniu ma znaczenie przy zapytaniach ze sprzeÅ¼eniami zewnÄ™trznymi, gdy jest wiÄ™cej niÅ¼ dwie tabele
+-- (z poprzednich Ä‡wiczeÅ„ mamy przynajmniej jednÄ… kategoriÄ™ i produkt nie powiÄ…zany ze sobÄ…)
+-- sprawdziÄ‡ iloÅ›Ä‡ zwracanych rekordÃ³w i dane ktÃ³re sÄ… zwracane
 SELECT c.CategoryName, p.ProductName, s.CompanyName
 	FROM Suppliers AS s INNER JOIN
 	Products AS p ON s.SupplierID = p.SupplierID RIGHT JOIN
 	Categories AS c ON p.CategoryID = c.CategoryID
--- sprawdziæ iloœæ zwracanych rekordów i dane które s¹ zwracane
+-- sprawdziÄ‡ iloÅ›Ä‡ zwracanych rekordÃ³w i dane ktÃ³re sÄ… zwracane
 SELECT c.CategoryName, p.ProductName, s.CompanyName
 	FROM Categories AS c LEFT JOIN
 	Products AS p ON p.CategoryID = c.CategoryID INNER JOIN
 	Suppliers AS s ON s.SupplierID = p.SupplierID
--- sprawdziæ iloœæ zwracanych rekordów i dane które s¹ zwracane
+-- sprawdziÄ‡ iloÅ›Ä‡ zwracanych rekordÃ³w i dane ktÃ³re sÄ… zwracane
 SELECT c.CategoryName, p.ProductName, s.CompanyName
 	FROM Categories AS c FULL JOIN
 	Products AS p ON p.CategoryID = c.CategoryID LEFT JOIN
 	Suppliers AS s ON s.SupplierID = p.SupplierID
--- ka¿de z zapytañ powinno zwróciæ inn¹ liczbê rekordów
+-- kaÅ¼de z zapytaÅ„ powinno zwrÃ³ciÄ‡ innÄ… liczbÄ™ rekordÃ³w
 SELECT c.CategoryName, p.ProductName, s.CompanyName
 	FROM Categories AS c FULL JOIN
 	Products AS p ON p.CategoryID = c.CategoryID LEFT JOIN
 	Suppliers AS s ON s.SupplierID = p.SupplierID
--- mo¿na wykorzystaæ nawiasy do okreœlenia kolejnoœci z³¹czeñ (zapytanie j.w.)
+-- moÅ¼na wykorzystaÄ‡ nawiasy do okreÅ›lenia kolejnoÅ›ci zÅ‚Ä…czeÅ„ (zapytanie j.w.)
 SELECT c.CategoryName, p.ProductName, s.CompanyName
 	FROM (Categories AS c FULL JOIN
 	Products AS p ON p.CategoryID = c.CategoryID) LEFT JOIN
 	Suppliers AS s ON s.SupplierID = p.SupplierID
 
---13. Czy s¹ kategorie w których produkty nie by³y ani razu sprzedane (lub produkty niesprzedane ale bez kategorii)
+--13. Czy sÄ… kategorie w ktÃ³rych produkty nie byÅ‚y ani razu sprzedane (lub produkty niesprzedane ale bez kategorii)
 
 select
 	p.ProductName
@@ -532,16 +532,16 @@ where not exists (
 )
 ;
 go
-/* Nie ma takiej kategorii, ale s¹ produkty niesprzedane bez kategorii */
+/* Nie ma takiej kategorii, ale sÄ… produkty niesprzedane bez kategorii */
 
 -----------------------------------------------------------------
 -- Operacje na zbiorach (union , union all, intersect, except) --
 -----------------------------------------------------------------
 
---14. -- Dodaj trzy zestawy danych i posortuj wzglêdem nazwy. Kolumny wynikowe powinny siê nazywaæ 'Name', 'Country', 'Type'
--- pierwszy zbiór - Zawiera nazwê dostawcy, kraj z którego pochodzi oraz informacjê w kolumnie trzeciej w postaci stringu 'Supplier'
--- drugi zbiór - Zawiera nazwê klienta, kraj z którego pochodzi oraz informacjê w kolumnie trzeciej w postaci stringu 'Customer' 
--- trzeci zbiór - Zawiera nazwisko pracownika, kraj z którego pochodzi oraz informacjê w kolumnie trzeciej w postaci stringu 'Employee' 
+--14. -- Dodaj trzy zestawy danych i posortuj wzglÄ™dem nazwy. Kolumny wynikowe powinny siÄ™ nazywaÄ‡ 'Name', 'Country', 'Type'
+-- pierwszy zbiÃ³r - Zawiera nazwÄ™ dostawcy, kraj z ktÃ³rego pochodzi oraz informacjÄ™ w kolumnie trzeciej w postaci stringu 'Supplier'
+-- drugi zbiÃ³r - Zawiera nazwÄ™ klienta, kraj z ktÃ³rego pochodzi oraz informacjÄ™ w kolumnie trzeciej w postaci stringu 'Customer' 
+-- trzeci zbiÃ³r - Zawiera nazwisko pracownika, kraj z ktÃ³rego pochodzi oraz informacjÄ™ w kolumnie trzeciej w postaci stringu 'Employee' 
 
 select
 	s.CompanyName as [Name]
@@ -564,7 +564,7 @@ order by [Name]
 ;
 go
 
---15. SprawdŸ czy s¹ klienci, którzy s¹ zarazem dostawcami (dodaj odpowiednie rekordy, które zwróc¹ wynik zapytania z danymi)
+--15. SprawdÅº czy sÄ… klienci, ktÃ³rzy sÄ… zarazem dostawcami (dodaj odpowiednie rekordy, ktÃ³re zwrÃ³cÄ… wynik zapytania z danymi)
 
 insert into Customers (
 	CustomerID
@@ -594,7 +594,7 @@ from Suppliers
 ;
 go
 
---16. Podaj tylko nazwy krajów dostawców i klientów z powtórzeniami
+--16. Podaj tylko nazwy krajÃ³w dostawcÃ³w i klientÃ³w z powtÃ³rzeniami
 select
 	Country
 from Customers
@@ -606,7 +606,7 @@ where Country is not null
 ;
 go
 
---17. Czy s¹ dostawcy z krajów, w których nie ma klientów w danej bazie danych (podaæ tylko nazwê kraju)
+--17. Czy sÄ… dostawcy z krajÃ³w, w ktÃ³rych nie ma klientÃ³w w danej bazie danych (podaÄ‡ tylko nazwÄ™ kraju)
 select
 	Country
 from Suppliers
@@ -619,7 +619,7 @@ go
 /* Tak, 4 takie kraje */
 
 
---18. Czy s¹ klienci z krajów, w których nie ma dostawców w danej bazie danych (podaæ tylko nazwê kraju)
+--18. Czy sÄ… klienci z krajÃ³w, w ktÃ³rych nie ma dostawcÃ³w w danej bazie danych (podaÄ‡ tylko nazwÄ™ kraju)
 select
 	Country
 from Customers
@@ -629,12 +629,12 @@ select
 from Suppliers
 ;
 go
-/* Tak, 9 takich krajów */
+/* Tak, 9 takich krajÃ³w */
 
 -----------------------
 -- Zadania dodatkowe --
 ----------------------- 
---19. ZnaleŸæ produkty wycofane ze sprzeda¿y.
+--19. ZnaleÅºÄ‡ produkty wycofane ze sprzedaÅ¼y.
 select
 	ProductName
 from Products
@@ -642,10 +642,10 @@ where Discontinued = 1
 ;
 go
 
---20. ZnaleŸæ produkty, który osi¹gnê³y minimalny stan magazynowy (wykorzystaæ sk³adniê case), 
+--20. ZnaleÅºÄ‡ produkty, ktÃ³ry osiÄ…gnÄ™Å‚y minimalny stan magazynowy (wykorzystaÄ‡ skÅ‚adniÄ™ case), 
 	-- =0 'brak produktu'
-	-- >0 and <= 10 'produkt nale¿y zamówic'
-	-- >10 and <= 20 'koñczy siê produkt'
+	-- >0 and <= 10 'produkt naleÅ¼y zamÃ³wic'
+	-- >10 and <= 20 'koÅ„czy siÄ™ produkt'
 	-- >20 'OK'
 select
 	ProductName
@@ -653,9 +653,9 @@ select
 		when UnitsInStock = 0
 			then 'brak produktu'
 		when 0 < UnitsInStock and UnitsInStock <= 10
-			then 'produkt nale¿y zamówiæ'
+			then 'produkt naleÅ¼y zamÃ³wiÄ‡'
 		when 10 < UnitsInStock and UnitsInStock <= 20
-			then 'koñczy siê produkt'
+			then 'koÅ„czy siÄ™ produkt'
 		when 20 < UnitsInStock
 			then 'OK'
 	end as StockSatus
@@ -663,16 +663,16 @@ from Products
 ;
 go
 
---21. Czy istniej¹ produkty, które s¹ aktualnie sprzedawane, dla których stan magazynu + zamówiony towar < Poziomu minimalnego
+--21. Czy istniejÄ… produkty, ktÃ³re sÄ… aktualnie sprzedawane, dla ktÃ³rych stan magazynu + zamÃ³wiony towar < Poziomu minimalnego
 
 select
 	ProductName
 from Products
 where (UnitsInStock + UnitsOnOrder) < ReorderLevel
 ;
-/* Tak, s¹ 2 takie produkty */
+/* Tak, sÄ… 2 takie produkty */
 
---22. Czy towary wycofne ze sprzeda¿y znajduj¹ siê w magazynie
+--22. Czy towary wycofne ze sprzedaÅ¼y znajdujÄ… siÄ™ w magazynie
 select
 	IsInStock
 	, count( * )
@@ -688,9 +688,9 @@ from (
 group by IsInStock
 ;
 go
-/* 4 produkty s¹ wci¹¿ w magazynie, 4 ju¿ nie */
+/* 4 produkty sÄ… wciÄ…Å¼ w magazynie, 4 juÅ¼ nie */
 
---23. Podaæ nazwê pracownika i regiony, w których realizuje sprzeda¿ (podajemy oprócz nazwy regionu tak¿e numer regionu)
+--23. PodaÄ‡ nazwÄ™ pracownika i regiony, w ktÃ³rych realizuje sprzedaÅ¼ (podajemy oprÃ³cz nazwy regionu takÅ¼e numer regionu)
 
 select
 	concat_ws(' ', e.FirstName, e.LastName ) as EmployeeName
@@ -706,7 +706,7 @@ left join Region r
 ;
 go
 
---24. Czy s¹ produkty, których cena sprzeda¿y nie zmieni³a siê w trakcie funkcjonowania firmy
+--24. Czy sÄ… produkty, ktÃ³rych cena sprzedaÅ¼y nie zmieniÅ‚a siÄ™ w trakcie funkcjonowania firmy
 
 select
 	p.ProductName

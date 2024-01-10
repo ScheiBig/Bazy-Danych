@@ -3,11 +3,11 @@ go
 
 --------------------
 --                --
---  NA ZAJÊCIACH  --
+--  NA ZAJÄ˜CIACH  --
 --                --
 --------------------
 
--- wyœwietl najdro¿sze produkty w danej kategorii
+-- wyÅ›wietl najdroÅ¼sze produkty w danej kategorii
 
 select
     c.CategoryName
@@ -43,7 +43,7 @@ where UnitPrice in (
 go
 
 
--- Dwa najdro¿sze produkty w danej kategorii
+-- Dwa najdroÅ¼sze produkty w danej kategorii
 
 select
     c.CategoryName
@@ -107,7 +107,7 @@ where m.CategoryID = c.CategoryID
 go
 
 
--- jaka jest wat. sprzeda¿y w poszczególnych latach?
+-- jaka jest wat. sprzedaÅ¼y w poszczegÃ³lnych latach?
 
 select
 	year( o.OrderDate ) [Year]
@@ -119,7 +119,7 @@ group by year( o.OrderDate )
 go
 
 
--- jaka jest wat. sprzeda¿y w poszczególnych miesi¹cach lat 1996 i '97?
+-- jaka jest wat. sprzedaÅ¼y w poszczegÃ³lnych miesiÄ…cach lat 1996 i '97?
 
 select
 	year( o.OrderDate ) [Year]
@@ -133,8 +133,8 @@ group by year( o.OrderDate ), month( o.OrderDate )
 go
 
 
--- jaka jest wartoœæ sprzeda¿y w poszczególnych miesi¹cach dwóch lat 
---   o najwiêkszej wartoœci realizacji sprzeda¿y (operator with)
+-- jaka jest wartoÅ›Ä‡ sprzedaÅ¼y w poszczegÃ³lnych miesiÄ…cach dwÃ³ch lat 
+--   o najwiÄ™kszej wartoÅ›ci realizacji sprzedaÅ¼y (operator with)
 
 with SalesPerMonth as (
 	select
@@ -158,7 +158,7 @@ where Year in (
 go
 
 
--- który z pracowników zrealizowa³ najwiêksz¹ liczbê zamówieñ, w ka¿dym
+-- ktÃ³ry z pracownikÃ³w zrealizowaÅ‚ najwiÄ™kszÄ… liczbÄ™ zamÃ³wieÅ„, w kaÅ¼dym
 --   z lat funkcjonowania firmy
 
 with OrdersPerEmployee as (
@@ -195,7 +195,7 @@ from
 where e.EmployeeID = eoty.EmployeeID
 go
 
--- jaki klient kupi³ za najwiêksz¹ kwotê sumarycznie, w ka¿dym z lat funkcjonowania firmy
+-- jaki klient kupiÅ‚ za najwiÄ™kszÄ… kwotÄ™ sumarycznie, w kaÅ¼dym z lat funkcjonowania firmy
 
 with OrderTotals as (
 	select
@@ -275,7 +275,7 @@ where c.CustomerID = otdr.CustomerID
 go
 
 
--- znajdŸ faktury ka¿dego z klientów opiewaj¹ce na najwy¿sze kwoty
+-- znajdÅº faktury kaÅ¼dego z klientÃ³w opiewajÄ…ce na najwyÅ¼sze kwoty
 
 with OrderTotals as (
 	select
@@ -307,7 +307,7 @@ where otdr.CustomerID = c.CustomerID
 go
 
 
--- podaj najlepiej sprzedaj¹ce siê produkty w ka¿dej z kategorii
+-- podaj najlepiej sprzedajÄ…ce siÄ™ produkty w kaÅ¼dej z kategorii
 
 with OrderQuantitiesProducts as (
 	select
@@ -337,7 +337,7 @@ where oqp.CategoryID = c.CategoryID
 go
 
 
--- jakie zamówiena zosta³y zrealizowane w ostatnich 2 miesi¹cach realizacji zamówieñ
+-- jakie zamÃ³wienia zostaÅ‚y zrealizowane w ostatnich 2 miesiÄ…cach realizacji zamÃ³wieÅ„
 
 with LastTwoMonths as (
 	select distinct top 2
@@ -358,7 +358,7 @@ where exists (
 )
 go
 
--- czy jest taki klient, który nie zrealizowa³ zamówienia w ostatnich dwóch miesi¹cach realizacji zamówieñ
+-- czy jest taki klient, ktÃ³ry nie zrealizowaÅ‚ zamÃ³wienia w ostatnich dwÃ³ch miesiÄ…cach realizacji zamÃ³wieÅ„
 
 with LastTwoMonths as (
 	select distinct top 2
@@ -385,7 +385,7 @@ where c.CustomerID not in (
 	select * from CustomersOfLastTwoMonths
 )
 go
-/* Tak, ca³kiem sporo takich klientów */
+/* Tak, caÅ‚kiem sporo takich klientÃ³w */
 
 
 ------------------
@@ -403,7 +403,7 @@ from Suppliers
 go
 
 
--- Ile jest dostawców i ilu dostawców ma podany w bazie danych faks  
+-- Ile jest dostawcÃ³w i ilu dostawcÃ³w ma podany w bazie danych faks  
 
 select 
 	count(*)
@@ -412,7 +412,7 @@ from Suppliers
 go
 
 
--- Podaj nazwy pañstw dostawców bez powtórzeñ
+-- Podaj nazwy paÅ„stw dostawcÃ³w bez powtÃ³rzeÅ„
 
 select distinct 
 	country
@@ -420,14 +420,14 @@ from Suppliers
 go
 
 
--- Ile jest pañstw gdzie znajduj¹ siê nasi dostawcy (jedna liczba)
+-- Ile jest paÅ„stw gdzie znajdujÄ… siÄ™ nasi dostawcy (jedna liczba)
 
 select 
 	count(distinct country)
 from Suppliers
 
 
--- 1. Ile jest produktów w tabeli Products (count), wartoœæ maksymalna ceny (max), minimalna cena (bez zera)(min) i wartoœæ œrednia (avg) (Dodaj produkt 'Prod X' z cen¹ NULL)
+-- 1. Ile jest produktÃ³w w tabeli Products (count), wartoÅ›Ä‡ maksymalna ceny (max), minimalna cena (bez zera)(min) i wartoÅ›Ä‡ Å›rednia (avg) (Dodaj produkt 'Prod X' z cenÄ… NULL)
 
 insert into Products (
 	ProductName
@@ -452,7 +452,7 @@ from Products p
 go
 
 
--- 2. Liczymy dodatkowo wartoœæ œredni¹ jako suma podzielona przez liczbê produktów oraz oblicona z wykorzystaniem AVG - porównaæ wyniki.
+-- 2. Liczymy dodatkowo wartoÅ›Ä‡ Å›redniÄ… jako suma podzielona przez liczbÄ™ produktÃ³w oraz oblicona z wykorzystaniem AVG - porÃ³wnaÄ‡ wyniki.
 
 select
 	avg( p.UnitPrice ) [AveragePrice ViaFunction]
@@ -460,11 +460,11 @@ select
 	, sum( p.UnitPrice ) / count ( p.UnitPrice ) [AveragePrice CountWithPrice]
 from Products p
 go
-/* Funkcja AVG() uwzglêdnia wy³¹cznie rekordy, gdzie wartoœæ podanej kolumny nie jest `null` */
-/* U¿ycie count( * ) w formule licz¹cej daje niezgodn¹ wartoœæ */
+/* Funkcja AVG() uwzglÄ™dnia wyÅ‚Ä…cznie rekordy, gdzie wartoÅ›Ä‡ podanej kolumny nie jest `null` */
+/* UÅ¼ycie count( * ) w formule liczÄ…cej daje niezgodnÄ… wartoÅ›Ä‡ */
 
 
--- 3. Jaka jest wartoœæ towaru w magazynie
+-- 3. Jaka jest wartoÅ›Ä‡ towaru w magazynie
 
 select
 	sum( p.UnitPrice * p.UnitsInStock ) TotalValue
@@ -472,7 +472,7 @@ from Products p
 go
 
 
--- 4. Jaka jest ca³kowita sprzeda¿ (bez upustów, z upustami, same upusty)
+-- 4. Jaka jest caÅ‚kowita sprzedaÅ¼ (bez upustÃ³w, z upustami, same upusty)
 
 select
 	sum( od.Quantity * p.UnitPrice ) TotalValueNormal
@@ -505,7 +505,7 @@ group by c.Country
 go
 
 
--- 6. Ile firm jest w danym kraju zaczynaj¹cych siê na litery od a do f.
+-- 6. Ile firm jest w danym kraju zaczynajÄ…cych siÄ™ na litery od a do f.
 
 with Companies as (
 	select
@@ -527,7 +527,7 @@ group by c.Country
 go
 
 
--- 7. Ile firm jest w danym kraju zaczynaj¹cych siê na litery od a do f. Wyœwietl te kraje gdzie liczba firm jest >=3 (GROUP BY, HAVING)
+-- 7. Ile firm jest w danym kraju zaczynajÄ…cych siÄ™ na litery od a do f. wyÅ›wietl te kraje gdzie liczba firm jest >=3 (GROUP BY, HAVING)
 
 with Companies as (
 	select
@@ -550,7 +550,7 @@ having count( * ) >= 3
 go
 
 
--- 8. Podaj nazwê kraju, z których pochodz¹ pracownicy oraz ilu ich jest w danym kraju (tabela Employees) oraz iloœæ pracowników jest sumarycznie (jedno zapytanie) (jedno zapytanie z opcj¹ rollup)
+-- 8. Podaj nazwÄ™ kraju, z ktÃ³rych pochodzÄ… pracownicy oraz ilu ich jest w danym kraju (tabela Employees) oraz iloÅ›Ä‡ pracownikÃ³w jest sumarycznie (jedno zapytanie) (jedno zapytanie z opcjÄ… rollup)
 
 /* Bez rollup */
 with EmployeesByCountry as (
@@ -571,7 +571,7 @@ from EmployeesByCountry ebc2
 order by NumberOfEmployees
 go
 
-/* Z u¿yciem rollup */
+/* Z uÅ¼yciem rollup */
 select
 	e.Country
 	, count( * ) NumberOfEmployees
@@ -580,7 +580,7 @@ group by rollup ( e.Country )
 go
 
 
--- Podaj na jak¹ kwotê znajduje sie towaru w magazynie
+-- Podaj na jakÄ… kwotÄ™ znajduje sie towaru w magazynie
 
 select 
 	sum( UnitPrice * UnitsInStock )
@@ -588,7 +588,7 @@ from Products
 go
 
 
--- Podaj na jak¹ kwotê znajduje sie towaru w magazynie w ka¿dej kategorii (podajemy nazwê kategorii) oraz we wszystkich kategoriach (jedno zapytanie z opcj¹ rollup)
+-- Podaj na jakÄ… kwotÄ™ znajduje sie towaru w magazynie w kaÅ¼dej kategorii (podajemy nazwÄ™ kategorii) oraz we wszystkich kategoriach (jedno zapytanie z opcjÄ… rollup)
 
 select
 	CategoryName
@@ -600,7 +600,7 @@ group by rollup ( CategoryName )
 --ORDER BY CategoryName
 
 
--- Podaj na jak¹ kwotê znajduje sie towaru w magazynie w ka¿dej kategorii categoryid (s¹ produkty bez kategorii i te¿ ma byc wyœwietlona ich kwota)
+-- Podaj na jakÄ… kwotÄ™ znajduje sie towaru w magazynie w kaÅ¼dej kategorii categoryid (sÄ… produkty bez kategorii i teÅ¼ ma byc wyÅ›wietlona ich kwota)
 
 -- funkcja CAST (sprawdzamy w dokumentacji)
 select
@@ -619,7 +619,7 @@ group by rollup ( isnull( convert( varchar, CategoryID ), 'brak kategorii' ) )
 --ORDER BY 1
 
 
--- 9. Podaj na jak¹ kwotê znajduje sie towaru w magazynie w ka¿dej kategorii categoryname (s¹ produkty bez kategorii i te¿ ma byc wyœwietlona ich kwota)
+-- 9. Podaj na jakÄ… kwotÄ™ znajduje sie towaru w magazynie w kaÅ¼dej kategorii categoryname (sÄ… produkty bez kategorii i teÅ¼ ma byc wyÅ›wietlona ich kwota)
 
 declare @no_category as varchar(32) = '--Brak kategorii--'
 
@@ -633,7 +633,7 @@ group by rollup ( coalesce( c.CategoryName, @no_category ) )
 go
 
 
--- 10. Podaj sumaryczn¹ sprzeda¿ - tabela [order details] bez upustów
+-- 10. Podaj sumarycznÄ… sprzedaÅ¼ - tabela [order details] bez upustÃ³w
 
 select
 	od.OrderID
@@ -645,7 +645,7 @@ group by rollup ( od.OrderID )
 go
 
 
--- 11. Podaj na jak¹ kwotê sprzedano towaru w ka¿dej kategorii  (podaj wszystkie kategorie)
+-- 11. Podaj na jakÄ… kwotÄ™ sprzedano towaru w kaÅ¼dej kategorii  (podaj wszystkie kategorie)
 
 select
 	c.CategoryName
@@ -659,7 +659,7 @@ group by  c.CategoryName
 go
 
 
--- 12. Podaj na jak¹ kwotê sprzedano towaru w ka¿dej kategorii - podajemy tylko te kategorie w których sprzedano towaru za kwotê powy¿ej 200 000.
+-- 12. Podaj na jakÄ… kwotÄ™ sprzedano towaru w kaÅ¼dej kategorii - podajemy tylko te kategorie w ktÃ³rych sprzedano towaru za kwotÄ™ powyÅ¼ej 200 000.
 
 select
 	c.CategoryName
@@ -674,7 +674,7 @@ having sum( od.Quantity * p.UnitPrice ) > 200000
 go
 
 
--- 13. Podaj ile rodzajów produktów by³o sprzedanych w kazdej kategorii
+-- 13. Podaj ile rodzajÃ³w produktÃ³w byÅ‚o sprzedanych w kazdej kategorii
 
 select
 	c.CategoryName
@@ -688,7 +688,7 @@ group by c.CategoryName
 go
 
 
--- 14. Porównujemy - -- nazwê kategorii, nazwê produktu i jego sprzeda¿ (wykorzystaæ cube nastêpnie rollup i znajdujemy ró¿nicê odejmuj¹c te zbiory)
+-- 14. PorÃ³wnujemy - -- nazwÄ™ kategorii, nazwÄ™ produktu i jego sprzedaÅ¼ (wykorzystaÄ‡ cube nastÄ™pnie rollup i znajdujemy rÃ³nicÄ™ odejmujÄ…c te zbiory)
 
 declare @no_category as varchar(32) = '--Brak kategorii--'
 declare @no_product as varchar(32) = '--Brak nazwy--'
@@ -733,7 +733,7 @@ from RollupTable
 go
 
 
--- 15. Który z pracowników sprzeda³ towarów za najwiêksz¹ kwotê
+-- 15. ktÃ³ry z pracownikÃ³w sprzedaÅ¼ towarÃ³w za najwiÄ™kszÄ… kwotÄ™
 
 with EmployeeSales as (
 	select
@@ -754,9 +754,9 @@ order by es.TotalSales desc
 go
 
 
--- 16. Podaj klienta, nazwê kategorii i sumaryczn¹ jego sprzeda¿ w ka¿dej z nich
+-- 16. Podaj klienta, nazwÄ™ kategorii i sumarycznÄ… jego sprzedaÅ¼ w kaÅ¼dej z nich
 
-declare @no_sales as varchar(32) = '--Brak sprzeda¿y--'
+declare @no_sales as varchar(32) = '--Brak sprzedaÅ¼y--'
 
 select
 	cs.CompanyName
@@ -778,7 +778,7 @@ group by rollup (
 )
 go
 
--- 17. Jaki spedytor przewióz³ najwiêksz¹ wartoœæ sprzedanych towarów
+-- 17. Jaki spedytor przewiÃ³zÅ‚ najwiÄ™kszÄ… wartoÅ›Ä‡ sprzedanych towarÃ³w
 
 with ShipperSales as (
 	select
@@ -799,7 +799,7 @@ order by ss.TotalSales desc
 go
 
 
--- 18. Wykorzystaæ funkcjê grouping do zapytania podaj¹cego nazwê kategorii, nazwê produktu i jego sprzeda¿
+-- 18. WykorzystaÄ‡ funkcjÄ™ grouping do zapytania podajÄ…cego nazwÄ™ kategorii, nazwÄ™ produktu i jego sprzedaÅ¼
 
 with CategoryProductSalesSummary as (
 	select
@@ -829,31 +829,31 @@ select
 	, coalesce(
 		ProductName
 		, case g_p
-			when 0 then 'Brak produktów'
+			when 0 then 'Brak produktÃ³w'
 			else '--- Podsumowanie ---'
 		end
 	) ProductName
-	, coalesce( cast( TotalSales as varchar ), 'Brak sprzeda¿y' ) TotalSales
+	, coalesce( cast( TotalSales as varchar ), 'Brak sprzedaÅ¼y' ) TotalSales
 from CategoryProductSalesSummary
 
 
 ------ funkcje, agregacje:
 ------------------------------------------------------------------------------------------
--- Agregacja danych, funkcje zwi¹zan¹ z dat¹, zapytania z podzapytaniami, zapytania CTE --
+-- Agregacja danych, funkcje zwiÄ…zanÄ… z datÄ…, zapytania z podzapytaniami, zapytania CTE --
 ------------------------------------------------------------------------------------------
 
--- 1. Podaj aktualn¹ datê systemow¹
+-- 1. Podaj aktualnÄ… datÄ™ systemowÄ…
 
 select sysdatetime() CurrentDateTime 
 go
 
 
--- 2. Jak dodaæ jedn¹ godzinê do daty systemowej
+-- 2. Jak dodaÄ‡ jednÄ… godzinÄ™ do daty systemowej
 
 select dateadd( hour, 1, sysdatetime() ) [CurrentDateTime + 1h]
 go
 
--- 3. Podaj z daty systemowej osobno rok, miesi¹c i dzieñ podany jako typ integer (YEAR, MONTH, DAY)
+-- 3. Podaj z daty systemowej osobno rok, miesiÄ™c i dzieÅ„ podany jako typ integer (YEAR, MONTH, DAY)
 
 select
 	year( sysdatetime() ) CurrentYear
@@ -862,7 +862,7 @@ select
 go
 
 
--- 4. Podaj z daty systemowej osobno rok, miesi¹c i dzieñ podany jako typ integer (funkcja DATEPART)
+-- 4. Podaj z daty systemowej osobno rok, miesiÄ™c i dzieÅ„ podany jako typ integer (funkcja DATEPART)
 
 select
 	datepart( year, sysdatetime() ) CurrentYear
@@ -871,7 +871,7 @@ select
 go
 
 
--- 5. Podaj z daty systemowej osobno godzinê, miinuty i sekundy jako typ integer (funkcja DATEPART)
+-- 5. Podaj z daty systemowej osobno godzinÄ™, miinuty i sekundy jako typ integer (funkcja DATEPART)
 
 select
 	datepart( hour, sysdatetime() ) CurrentHour
@@ -880,7 +880,7 @@ select
 go
 
 
--- 6. Podaj z daty systemowej osobno rok, miesi¹c i dzieñ podany jako typ char (funkcja DATENAME)
+-- 6. Podaj z daty systemowej osobno rok, miesiÄ™c i dzieÅ„ podany jako typ char (funkcja DATENAME)
 
 select
 	datename( year, sysdatetime() ) CurrentYear
@@ -889,7 +889,7 @@ select
 go
 
 
--- 7. Podaj nazwê aktualnego miesi¹ca podanego jako nazwa oraz dzieñ w postaci nazwy (kwiecieñ, poniedzia³ek) oraz (april, monday)
+-- 7. Podaj nazwÄ™ aktualnego miesiÄ™ca podanego jako nazwa oraz dzieÅ„ w postaci nazwy (kwiecieÅ„, poniedziaÅ‚ek) oraz (april, monday)
     -- select @@LANGUAGE /* us_english */
 
 set language POLISH
@@ -905,7 +905,7 @@ select
 go
 
 
--- 8. Ile lat up³yne³o od ostatniego zamówienia (funkcja DATEDIFF)
+-- 8. Ile lat upÅ‚yneÅ‚o od ostatniego zamÃ³wienia (funkcja DATEDIFF)
 
 select
 	datediff(
@@ -916,7 +916,7 @@ select
 go
 
 
--- 9. Ile miesiêcy up³yne³o od ostatniego zamówienia (funkcja DATEDIFF)
+-- 9. Ile miesiÄ™cy upÅ‚yneÅ‚o od ostatniego zamÃ³wienia (funkcja DATEDIFF)
 
 select
 	datediff(
@@ -927,7 +927,7 @@ select
 go
 
 
--- 10. Dodaj do bie¿¹cej daty 3 miesi¹ce (funkcja DATEADD)
+-- 10. Dodaj do bieÅ¼Ä…cej daty 3 miesiÄ™ce (funkcja DATEADD)
 
 select dateadd( month, 3, sysdatetime() ) [CurrentDateTime + 3mnth]
 go
@@ -936,15 +936,15 @@ select dateadd( quarter, 1, sysdatetime() ) [CurrentDateTime + 3mnth]
 go
 
 
--- 11. W jaki dzieñ obchodzimy w tym roku urodziny (korzystamy z funkcji CONVERT do zamiany naszej daty tekstowej na typ DATETIME lub DATE)
+-- 11. W jaki dzieÅ„ obchodzimy w tym roku urodziny (korzystamy z funkcji CONVERT do zamiany naszej daty tekstowej na typ DATETIME lub DATE)
 
 select datename( weekday, convert( datetime, '2024-06-18' ) ) WeekDayOfBirthday
 go
 
 
--- 12. W jaki dzieñ tygodnia przypada w przysz³ym roku w ostatni dzieñ lutego oraz ile dni ma luty w przysz³ym roku 
+-- 12. W jaki dzieÅ„ tygodnia przypada w przyszÅ‚ym roku w ostatni dzieÅ„ lutego oraz ile dni ma luty w przyszÅ‚ym roku 
    --(korzystamy z funkcji CONVERT do zamiany naszej daty tekstowej na typ datetime bez korzystania z funkcji EOMONTH()
-   --a nastêpnie z korzystamy z funkcji EOMONTH())
+   --a nastÄ™pnie z korzystamy z funkcji EOMONTH())
 
 with LastDayOfFeb as (
 	select dateadd( day, -1, convert( datetime, '2024-03-01' ) ) Val
@@ -965,7 +965,7 @@ from LastDayOfFeb
 go
 
 
--- 13. W jakich kolejnych latach by³a realizowana sprzeda¿ w bazie NORTHWIND
+-- 13. W jakich kolejnych latach byÅ‚a realizowana sprzedaÅ¼ w bazie NORTHWIND
 
 select distinct
 	year( o.OrderDate ) Years 
@@ -974,7 +974,7 @@ order by Years
 go
 
 
--- 14. Podaj sprzeda¿ towarów, w ka¿dym roku dzia³ania firmy (bez upustów)
+-- 14. Podaj sprzedaÅ¼ towarÃ³w, w kaÅ¼dym roku dziaÅ‚ania firmy (bez upustÃ³w)
 
 select
 	year( o.OrderDate ) [Year]
@@ -987,8 +987,8 @@ group by year( o.OrderDate )
 go
 
 
--- 15. Podaj sprzeda¿ towarów w ka¿dym roku i miesi¹cu dzia³ania firmy
-   -- rok i miesi¹c podajemy w jednej kolumnie 
+-- 15. Podaj sprzedaÅ¼ towarÃ³w w kaÅ¼dym roku i miesiÄ™cu dziaÅ‚ania firmy
+   -- rok i miesiÄ™c podajemy w jednej kolumnie 
 
 select
 	format( o.OrderDate, 'yyyy-MM' ) [Year Month]
@@ -1002,8 +1002,8 @@ group by
 go
 
 
--- 16. Podaj sprzeda¿ towarów w ka¿dym roku i miesi¹cu dzia³ania firmy
-   -- rok i miesi¹c podajemy w osobnych kolumnach)
+-- 16. Podaj sprzedaÅ¼ towarÃ³w w kaÅ¼dym roku i miesiÄ™cu dziaÅ‚ania firmy
+   -- rok i miesiÄ™c podajemy w osobnych kolumnach)
   
 select
 	year( o.OrderDate ) [Year]
@@ -1022,7 +1022,7 @@ order by
 go
 
 
--- 17. Do ostatniego zapytania do³ó¿ klauzulê CUBE i ROLLUP i porównaj wyniki obu zapytañ (EXCEPT)
+-- 17. Do ostatniego zapytania doÅ‚Ã³Å¼ klauzulÄ™ CUBE i ROLLUP i porÃ³wnaj wyniki obu zapytaÅ„ (EXCEPT)
 
 drop table if exists #CubeTable
 drop table if exists #RollupTable
@@ -1076,8 +1076,8 @@ drop table if exists #RollupTable
 go
 
 
--- 18. Podaj numery zamówieñ, ich datê oraz ca³kowit¹ wartoœæ (orderid, orderdate, unitprice*quantity) 
-	-- oraz posortuj wzglêdem ca³kowitej wartoœci
+-- 18. Podaj numery zamÃ³wieÅ„, ich datÄ™ oraz caÅ‚kowitÄ… wartoÅ›Ä‡ (orderid, orderdate, unitprice*quantity) 
+	-- oraz posortuj wzglÄ™dem caÅ‚kowitej wartoÅ›ci
 
 with OrderTotals as (
 	select
@@ -1097,8 +1097,8 @@ order by ot.TotalSales
 go
 
 
--- 19. Podaj numery zamówieñ, ich datê oraz ca³kowit¹ wartoœæ, 
-	-- które by³y zrealizowane na najwiêksz¹ wartoœæ 
+-- 19. Podaj numery zamÃ³wieÅ„, ich datÄ™ oraz caÅ‚kowitÄ… wartoÅ›Ä‡, 
+	-- ktÃ³re byÅ‚y zrealizowane na najwiÄ™kszÄ… wartoÅ›Ä‡ 
 
 with OrderTotals as (
 	select
@@ -1118,8 +1118,8 @@ order by ot.TotalSales desc
 go
 
 
--- 20. Podaj numery zamówieñ, ich datê oraz ca³kowit¹ wartoœæ, 
-	-- które by³y zrealizowane na najmniejsz¹ wartoœæ(bez 0)
+-- 20. Podaj numery zamÃ³wieÅ„, ich datÄ™ oraz caÅ‚kowitÄ… wartoÅ›Ä‡, 
+	-- ktÃ³re byÅ‚y zrealizowane na najmniejszÄ… wartoÅ›Ä‡(bez 0)
 
 with OrderTotals as (
 	select
@@ -1140,8 +1140,8 @@ order by ot.TotalSales
 go
 
 
--- 21. Podaj numery zamówieñ, ich datê oraz ca³kowit¹ wartoœæ, 
-	-- które by³y zrealizowane na najwiêksz¹ wartoœæ i na najmniejsz¹ wartoœæ(bez 0) w jednym zapytaniu.
+-- 21. Podaj numery zamÃ³wieÅ„, ich datÄ™ oraz caÅ‚kowitÄ… wartoÅ›Ä‡, 
+	-- ktÃ³re byÅ‚y zrealizowane na najwiÄ™kszÄ… wartoÅ›Ä‡ i na najmniejszÄ… wartoÅ›Ä‡(bez 0) w jednym zapytaniu.
 
 select
 	ot.OrderID
@@ -1160,9 +1160,9 @@ order by ot.TotalSales desc
 go
 
 
--- 22. Podaj numery zamówieñ, ich datê oraz ca³kowit¹ wartoœæ, 
-	-- które by³y zrealizowane na najwiêksz¹ wartoœæ i na najmniejsz¹ wartoœæ(bez 0) w jednym zapytaniu.
-	-- zapytania typu CTE zaczynaj¹ce siê klauzul¹ WITH
+-- 22. Podaj numery zamÃ³wieÅ„, ich datÄ™ oraz caÅ‚kowitÄ… wartoÅ›Ä‡, 
+	-- ktÃ³re byÅ‚y zrealizowane na najwiÄ™kszÄ… wartoÅ›Ä‡ i na najmniejszÄ… wartoÅ›Ä‡(bez 0) w jednym zapytaniu.
+	-- zapytania typu CTE zaczynajÄ…ce siÄ™ klauzulÄ… WITH
 	
 with OrderTotals as (
 	select
@@ -1182,7 +1182,7 @@ order by ot.TotalSales desc
 go
 
 
--- 23. Podaj najdro¿szy i najtañszy z produktów (bez klauzuli TOP ani FETCH FIRST) (Podzapytania)
+-- 23. Podaj najdroÅ¼szy i najtaÅ„szy z produktÃ³w (bez klauzuli TOP ani FETCH FIRST) (Podzapytania)
 
 select
 	p1.ProductName
@@ -1200,8 +1200,8 @@ where p1.UnitPrice = p1.MaxUnitPrice
 go
 
 
--- 24. Podaj najdro¿szy i najtañszy z produktów (bez klauzuli TOP ani FETCH FIRST) (Podzapytania)
-	-- Zapytanie typu CTE zaczynaj¹c¹ siê na WITH
+-- 24. Podaj najdroÅ¼szy i najtaÅ„szy z produktÃ³w (bez klauzuli TOP ani FETCH FIRST) (Podzapytania)
+	-- Zapytanie typu CTE zaczynajÄ…cÄ… siÄ™ na WITH
 
 with ProductsWithMaxMin as (
 	select
@@ -1220,9 +1220,9 @@ where p1.UnitPrice = p1.MaxUnitPrice
 go
 
 
--- 25. Podaj numery zamówieñ, ich datê oraz ca³kowit¹ wartoœæ, 
-	-- które by³y zrealizowane na najwiêksz¹ wartoœæ i na najmniejsz¹ wartoœæ(bez 0) w jednym zapytaniu.
-	-- wykonaj powy¿sze zapytanie bez klauzuli top tylko z wykorzystaniem podzapytañ
+-- 25. Podaj numery zamÃ³wieÅ„, ich datÄ™ oraz caÅ‚kowitÄ… wartoÅ›Ä‡, 
+	-- ktÃ³re byÅ‚y zrealizowane na najwiÄ™kszÄ… wartoÅ›Ä‡ i na najmniejszÄ… wartoÅ›Ä‡(bez 0) w jednym zapytaniu.
+	-- wykonaj powyÅ¼sze zapytanie bez klauzuli top tylko z wykorzystaniem podzapytaÅ„
 
 select
 	otr.OrderID
@@ -1249,8 +1249,8 @@ where otr.TotalSales = otr.MaxTotalSales
 go
 
 
--- 26. Skasuj produkty nale¿¹ce do kategorii CATX (nie znamy categoryid tylko categoryname)
-	-- (najpierw dodaæ kategorie CATX i póŸniej 2 produkty nale¿¹ce do tej kategorii)
+-- 26. Skasuj produkty naleÅ¼Ä…ce do kategorii CATX (nie znamy categoryid tylko categoryname)
+	-- (najpierw dodaÄ‡ kategorie CATX i pÃ³Åºniej 2 produkty naleÅ¼Ä…ce do tej kategorii)
 
 insert into Categories (
 	CategoryName
@@ -1284,7 +1284,7 @@ where CategoryName = 'CATX'
 go
 
 
--- 27. Jaka jest sprzeda¿ sumaryczna w roku 1996 i 1997 (bez group by)
+-- 27. Jaka jest sprzedaÅ¼ sumaryczna w roku 1996 i 1997 (bez group by)
 
 select distinct
 	year( o.OrderDate ) [Year]
@@ -1299,7 +1299,7 @@ where year( o.OrderDate ) in (
 go
 
 
--- 28. Podaj nazwê klienta, rok sprzeda¿y oraz wartoœæ sprzeda¿y w danym roku.
+-- 28. Podaj nazwÄ™ klienta, rok sprzedaÅ¼y oraz wartoÅ›Ä‡ sprzedaÅ¼y w danym roku.
 
 select
 	c.CompanyName
@@ -1319,7 +1319,7 @@ order by
 go
 
 
--- 29. W jaki dzieñ tygodnia sumaryczenie sprzedano towaru za najwêksz¹ kwotê.
+-- 29. W jaki dzieÅ„ tygodnia sumaryczenie sprzedano towaru za najwiÄ™kszÄ… kwotÄ™.
 
 select top 1
 	datename( weekday, o.OrderDate ) DayOfTheWeek
@@ -1332,7 +1332,7 @@ group by
 go
 
 
--- 30. Podaj nazwê kategorii oraz rok w którym w danej kategorii by³a najwiêksza sprzeda¿.
+-- 30. Podaj nazwÄ™ kategorii oraz rok w ktÃ³rym w danej kategorii byÅ‚a najwiÄ™ksza sprzedaÅ¼.
 
 with SalesPerCategoryAnnually as (
 	select
@@ -1364,7 +1364,7 @@ where Ranking = 1
 go
 
 
--- 31. W którym roku by³a nawy¿sza sprzeda¿.
+-- 31. W ktÃ³rym roku byÅ‚a nawyÅ¼sza sprzedaÅ¼.
 
 select top 1
 	year( o.OrderDate ) [Year]
@@ -1378,7 +1378,7 @@ order by TotalSales desc
 go
 
 
--- 32. Który z pracowników obs³u¿y³ klientów za najwiêksz¹ kwotê.
+-- 32. ktÃ³ry z pracownikÃ³w obsÅ‚uÅ¼yÅ‚ klientÃ³w za najwiÄ™kszÄ… kwotÄ™.
 
 with EmployeeSalesRanking as (
 	select
@@ -1403,7 +1403,7 @@ go
 
 
 ----------------
-/* Sprz¹tanie */
+/* SprzÄ…tanie */
 
 delete from Products
 where ProductID in (
