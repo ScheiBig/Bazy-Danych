@@ -1,0 +1,74 @@
+
+Czytelnicy {
+	id_czytelnika integer pk increments unique
+	nazwisko varchar(64)
+	imie varchar(32)
+	id_dokumentu varchar(128)
+	nr_dokumentu varchar(32)
+	PESEL char(11)
+	data_urodzenia date
+	miejsce_urodzenia varchar(32)
+	numer_telefonu char(9)
+	kod_pocztowy char(6)
+	miejscowosc varchar(32)
+	typ_ulicy char(5) null
+	nazwa_ulicy varchar(96) null
+	numer_posesji varchar(8)
+	numer_mieszkania varchar(8) null
+	id_wojewodztwa integer *> Wojewodztwa.id_wojewodztwa
+}
+
+Autorzy {
+	id_autora integer pk increments unique
+	nazwisko varchar(64)
+	imie varchar(32)
+}
+
+Rejestr_Wypozyczen {
+	id_czytelnika integer pk *> Czytelnicy.id_czytelnika
+	id_egzemplarza integer pk *> Egzemplarze.id_egzemplarza
+	data_wypozyczenia datetime pk
+	termin_zwrotu datetime
+	data_zwrotu datetime null
+}
+
+Autorstwo_Publikacji {
+	id_publikacji integer pk *> Publikacje.id_publikacji
+	id_autora integer pk *> Autorzy.id_autora
+}
+
+Kategorie {
+	id_kategorii integer pk increments unique
+	nazwa_kategorii varchar(64)
+}
+
+Publikacje {
+	id_publikacji integer pk increments unique
+	rok_wydania date
+	miejsce_wydania varchar(32)
+	id_kategorii integer *> Kategorie.id_kategorii
+	id_wydawnictwa integer *> Wydawnictwa.id_wydawnictwa
+}
+
+Wydawnictwa {
+	id_wydawnictwa integer pk increments unique
+	nazwa_wydawnictwa varchar(128)
+}
+
+Szafki {
+	id_szafki integer pk increments unique
+	numer_szafki varchar(16)
+}
+
+Wojewodztwa {
+	id_wojewodztwa integer pk increments unique
+	nazwa_wojewodztwa char(20)
+}
+
+Egzemplarze {
+	id_egzemplarza integer pk increments unique
+	id_szafki integer *> Szafki.id_szafki
+	id_publikacji integer *> Publikacje.id_publikacji
+	stan_dostepnosci integer
+}
+
