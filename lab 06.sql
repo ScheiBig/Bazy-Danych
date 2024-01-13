@@ -793,7 +793,7 @@ select * from sys.databases
 --29. W bazie TestDB założyć trzy tabele: STUDENCI, PRZEDMIOTY, ZALICZENIE. Zaproponować nazwy kolumn oraz typy danych tak, by możlowe było wprowadzanie do tych tabel nazwisk, imion studentów, nazw przedmiotów oraz ocen różnych zaliczeń danych studentów z przedmiotów. Dodatkowo proszę zarejestrowac kiedy takie zaliczenie się odbyło oraz jaką ocenę (przyjąć zakres ocen 2.0, 2.5, 3.0,3.5,4.0,4.5,5.0) dana osoba otrzymała. 
 
 create table TestDB.dbo.Studenci (
-	id_studenta int not null
+	id_studenta int identity(1,1) not null
 	, imie nvarchar(32)
 	, nazwisko nvarchar(64)
 
@@ -801,14 +801,14 @@ create table TestDB.dbo.Studenci (
 )
 
 create table TestDB.dbo.Przedmioty (
-	id_przedmiotu int not null
+	id_przedmiotu int identity(1,1) not null
 	, nazwa_przedmiotu nvarchar(128)
 
 	, constraint PK_przedmiot primary key ( id_przedmiotu )
 )
 
 create table TestDB.dbo.Zaliczenia (
-	id_zaliczenia int not null
+	id_zaliczenia int identity(1,1) not null
 	, id_studenta int not null
 	, id_przedmiotu int not null
 	, data_zaliczenia datetime not null
