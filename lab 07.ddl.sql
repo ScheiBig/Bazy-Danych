@@ -62,6 +62,7 @@ create table Wydawnictwa (
 		constraint NN_nazwa not null
 		constraint UQ_nazwa_wydawnictwa unique
 )
+go
 
 create table Kategorie (
 
@@ -98,6 +99,7 @@ create table Publikacje (
 
 	, miejsce_wydania nvarchar(32)
 )
+go
 
 create table Autorzy (
 
@@ -113,6 +115,7 @@ create table Autorzy (
 
 	, uwagi nvarchar(128)
 )
+go
 
 create table [Autorstwa Publikacji] (
 
@@ -126,6 +129,7 @@ create table [Autorstwa Publikacji] (
 
 	, constraint PK_autorstwo primary key ( id_autora, id_publikacji )
 )
+go
 
 create table Szafki (
 
@@ -135,6 +139,7 @@ create table Szafki (
 
 	, lokalizacja nvarchar(64)
 )
+go
 
 create table Egzemplarze (
 
@@ -154,6 +159,7 @@ create table Egzemplarze (
 		constraint NN_ubytki not null
 		constraint DF_ubytki default 'Brak'
 )
+go
 
 create table Wojewodztwa (
 	
@@ -171,6 +177,7 @@ create table Wojewodztwa (
 			, 'świętokrzyskie', 'warmińsko-mazurskie', 'wielkopolskie', 'zachodniopomorskie'
 		) )
 )
+go
 
 create table Czytelnicy (
 	
@@ -289,6 +296,7 @@ create table Czytelnicy (
 		constraint NN_wojewodztwo not null
 		constraint FK_wojewodztwo references Wojewodztwa( id_wojewodztwa )
 )
+go
 
 
 create table [Rejestr Wypozyczen] (
@@ -315,6 +323,7 @@ create table [Rejestr Wypozyczen] (
 	, constraint CH_termin_kolejnosc check ( termin_zwrotu > data_wypozyczenia )
 	, constraint CH_daty_kolejnosc check (data_zwrotu is null or data_zwrotu > data_wypozyczenia )
 )
+go
 
 
 -------------------------
