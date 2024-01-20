@@ -1,15 +1,15 @@
-USE Northwind;
+ï»¿USE Northwind;
 
 ---------------------------------------------------------------------
 -- Zmienne
 ---------------------------------------------------------------------
 
--- Deklarowanie zmiennej i inicjowanie jej wartoœci
+-- Deklarowanie zmiennej i inicjowanie jej wartoÅ›ci
 DECLARE @i AS INT;
 SET @i = 10;
 GO
 
--- Deklarowanie i inicjowanie zmiennej w jednym wyra¿eniu
+-- Deklarowanie i inicjowanie zmiennej w jednym wyraÅ¼eniu
 DECLARE @i AS INT = 10;
 GO
 
@@ -23,7 +23,7 @@ SET @empname = (SELECT firstname + N' ' + lastname
 SELECT @empname AS empname;
 GO
 
--- U¿ycie polecenia SET do przypisania po jednej zmiennej na raz
+-- UÅ¼ycie polecenia SET do przypisania po jednej zmiennej na raz
 DECLARE @firstname AS NVARCHAR(20), @lastname AS NVARCHAR(40);
 
 SET @firstname = (SELECT firstname
@@ -36,7 +36,7 @@ SET @lastname = (SELECT lastname
 SELECT @firstname AS firstname, @lastname AS lastname;
 GO
 
--- U¿ycie polecenia SELECT do przypisania wielu zmiennych w jednym wyra¿eniu
+-- UÅ¼ycie polecenia SELECT do przypisania wielu zmiennych w jednym wyraÅ¼eniu
 DECLARE @firstname AS NVARCHAR(20), @lastname AS NVARCHAR(40);
 
 SELECT
@@ -48,7 +48,7 @@ WHERE EmployeeID = 3;
 SELECT @firstname AS firstname, @lastname AS lastname;
 GO
 
--- SELECT nie powoduje b³êdu w przypadku zwrócenia wielu wierszy 
+-- SELECT nie powoduje bÅ‚Ä™du w przypadku zwrÃ³cenia wielu wierszy 
 DECLARE @empname AS NVARCHAR(61);
 
 SELECT @empname = firstname + N' ' + lastname
@@ -58,7 +58,7 @@ WHERE ReportsTo = 2;
 SELECT @empname AS empname;
 GO
 
--- SET powoduje b³¹d, gdy zwracanych jest wiele wierszy 
+-- SET powoduje bÅ‚Ä…d, gdy zwracanych jest wiele wierszy 
 DECLARE @empname AS NVARCHAR(61);
 
 SET @empname = (SELECT firstname + N' ' + lastname
@@ -81,7 +81,7 @@ GO
 -- Niepoprawne
 PRINT 'Second batch';
 SELECT CustomerID FROM Customers;
-SELECT orderid FOM Orders;   --tutaj jest z³a sk³adnia
+SELECT orderid FOM Orders;   --tutaj jest zÅ‚a skÅ‚adnia
 GO
 -- Poprawne
 PRINT 'Third batch';
@@ -99,7 +99,7 @@ GO
 PRINT @i;
 GO
 
--- Instrukcje, których nie mo¿na ³¹czyæ w tym samym wsadzie
+-- Instrukcje, ktÃ³rych nie moÅ¼na Å‚Ä…czyÄ‡ wÂ tym samym wsadzie
 
 DROP VIEW IF EXISTS MyView;
 
@@ -112,7 +112,7 @@ GO
 
 -- Plik wsadowy jako jednostka
 
--- Utwórz tabelê T1 z jedn¹ kolumn¹
+-- UtwÃ³rz tabelÄ™ T1 z jednÄ… kolumnÄ…
 DROP TABLE IF EXISTS dbo.T1;
 CREATE TABLE dbo.T1(col1 INT);
 GO
@@ -129,16 +129,16 @@ SELECT col1, col2 FROM dbo.T1;
 GO
 
 -- Opcja GO n 
---wykonuj¹c poni¿sze dwie linijki razem wykonujemy polecenia przed 100 razy
+--wykonujÄ…c poniÅ¼sze dwie linijki razem wykonujemy polecenia przed 100 razy
 insert into categories values ('nazwa')
 GO 100 
 
--- Tworzymy tabelê T1 z kolumn¹ identity
+-- Tworzymy tabelÄ™ T1 z kolumnÄ… identity
 DROP TABLE IF EXISTS dbo.T1;
 CREATE TABLE dbo.T1(col1 INT IDENTITY CONSTRAINT PK_T1 PRIMARY KEY);
 GO
 
--- Pomiñ wyœwietlanie komunikatów
+-- PomiÅ„ wyÅ›wietlanie komunikatÃ³w
 SET NOCOUNT ON;
 GO
 
@@ -154,35 +154,35 @@ SELECT * FROM dbo.T1;
 
 -- Instrukcja IF ... ELSE
 IF YEAR(SYSDATETIME()) <> YEAR(DATEADD(day, 1, SYSDATETIME()))
-  PRINT 'Dzisiejszy dzieñ to ostatni dzieñ roku.';
+  PRINT 'Dzisiejszy dzieÅ„ to ostatni dzieÅ„ roku.';
 ELSE
-  PRINT 'Dzisiejszy dzieñ nie jest ostatnim dniem roku.';
+  PRINT 'Dzisiejszy dzieÅ„ nie jest ostatnim dniem roku.';
 GO
 
 -- IF ELSE IF
 IF YEAR(SYSDATETIME()) <> YEAR(DATEADD(day, 1, SYSDATETIME()))
-  PRINT 'Dzisiejszy dzieñ to ostatni dzieñ roku.';
+  PRINT 'Dzisiejszy dzieÅ„ to ostatni dzieÅ„ roku.';
 ELSE
   IF MONTH(SYSDATETIME()) <> MONTH(DATEADD(day, 1, SYSDATETIME()))
-    PRINT 'Dzisiejszy dzieñ to ostatni dzieñ miesi¹ca ale nie ostatni dzieñ roku.';
+    PRINT 'Dzisiejszy dzieÅ„ to ostatni dzieÅ„ miesiÄ…ca ale nie ostatni dzieÅ„ roku.';
   ELSE 
-    PRINT 'Dzisiejszy dzieñ nie jest ostatnim dniem miesi¹ca.';
+    PRINT 'Dzisiejszy dzieÅ„ nie jest ostatnim dniem miesiÄ…ca.';
 GO
 
--- Blok wyra¿eñ
+-- Blok wyraÅ¼eÅ„
 IF DAY(SYSDATETIME()) = 1
 BEGIN
-  PRINT 'Dzisiejszy dzieñ to pierwszy dzieñ miesi¹ca.';
-  PRINT 'Uruchomienie procesu dla pierwszego dnia miesi¹ca.';
+  PRINT 'Dzisiejszy dzieÅ„ to pierwszy dzieÅ„ miesiÄ…ca.';
+  PRINT 'Uruchomienie procesu dla pierwszego dnia miesiÄ…ca.';
   /* ... tu umieszczany jest kod procesu... */
-  PRINT 'Zakoñczony proces bazy danych dla pierwszego dnia miesi¹ca.';
+  PRINT 'ZakoÅ„czony proces bazy danych dla pierwszego dnia miesiÄ…ca.';
 END
 ELSE
 BEGIN
-  PRINT 'Dzisiejszy dzieñ nie jest pierwszym dniem miesi¹ca.';
-  PRINT 'Uruchomienie procesu innego ni¿ proces dla pierwszego dnia miesi¹ca.';
+  PRINT 'Dzisiejszy dzieÅ„ nie jest pierwszym dniem miesiÄ…ca.';
+  PRINT 'Uruchomienie procesu innego niÅ¼ proces dla pierwszego dnia miesiÄ…ca.';
   /* ... tu umieszczany jest kod procesu... */
-  PRINT 'Zakoñczony proces nie-dla-pierwszego dnia miesi¹ca.';
+  PRINT 'ZakoÅ„czony proces nie-dla-pierwszego dnia miesiÄ…ca.';
 END
 GO
 
@@ -215,7 +215,7 @@ BEGIN
 END;
 GO
 
--- U¿ycie pêtli WHILE do wype³nienia tabeli liczbami
+-- UÅ¼ycie pÄ™tli WHILE do wypeÅ‚nienia tabeli liczbami
 SET NOCOUNT ON;
 DROP TABLE IF EXISTS dbo.Numbers;
 CREATE TABLE dbo.Numbers(n INT NOT NULL PRIMARY KEY);
@@ -234,7 +234,7 @@ select count(*) from Numbers;
 -- Kursory
 ---------------------------------------------------------------------
 
--- Wype³nianie zmiennych tabelarycznych i tabeli za pomoc¹ kursora
+-- WypeÅ‚nianie zmiennych tabelarycznych i tabeli za pomocÄ… kursora
 SET NOCOUNT ON;
 
 DECLARE @Result AS TABLE
@@ -274,7 +274,7 @@ SELECT * FROM @Result
 SELECT * from Test 
 GO
 
--- Napisaæ kod, który sprawdzi jakie w danej bazie s¹ widoki i skasuje wszystkie
+-- NapisaÄ‡ kod, ktÃ³ry sprawdzi jakie w danej bazie sÄ… widoki i skasuje wszystkie
 
 DECLARE
   @A1     AS NVARCHAR(40);
@@ -317,7 +317,7 @@ INSERT INTO #MyTable(ID, Num) values (1,1),(2,2),(3,3);
 SELECT * FROM #MyTable;
 GO
 
--- Spróbuj uzyskaæ dostêp do tabeli z innej sesji
+-- SprÃ³buj uzyskaÄ‡ dostÄ™p do tabeli z innej sesji
 
 SELECT * FROM #MyTable;
 
@@ -362,7 +362,7 @@ CREATE TYPE dbo.MyType AS TABLE
   Num INT NOT NULL
 );
 GO
--- U¿ycie typu tabelarycznego 
+-- UÅ¼ycie typu tabelarycznego 
 DECLARE @a1 AS dbo.MyType;
 
 INSERT INTO @a1(ID, Num) VALUES (1,1),(2,2),(3,3),(4,4);
@@ -376,7 +376,7 @@ GO
 
 -- Polecenie EXEC
 
--- Przyk³ad z poleceniem EXEC
+-- PrzykÅ‚ad z poleceniem EXEC
 DECLARE @sql AS VARCHAR(100);
 SET @sql = 'PRINT ''This message was printed by a dynamic SQL batch.'';';
 EXEC(@sql);
@@ -384,7 +384,7 @@ GO
 
 -- sp_executesql - Stored Procedure
 
--- Przyk³ad z uzyciem sp_executesql
+-- PrzykÅ‚ad z uzyciem sp_executesql
 DECLARE @sql AS NVARCHAR(100);
 
 SET @sql = N'SELECT orderid, orderdate
@@ -398,10 +398,10 @@ EXEC sys.sp_executesql
 GO
 
 ---------------------------------------------------------------------
--- Error Handling (Obs³uga b³êdów)
+-- Error Handling (ObsÅ‚uga bÅ‚Ä™dÃ³w)
 ---------------------------------------------------------------------
 
--- Prosty przyk³ad
+-- Prosty przykÅ‚ad
 BEGIN TRY
   PRINT 10/2;
   PRINT 'No error';
@@ -435,7 +435,7 @@ CREATE TABLE dbo.Employees1
 );
 GO
 
--- Przyk³ad wykorzystania
+-- PrzykÅ‚ad wykorzystania
 BEGIN TRY
 
   INSERT INTO dbo.Employees1(empid, empname, mgrid)
@@ -479,31 +479,275 @@ GO
 
 
 
---	1. Zdefiniuj blok anonimowy T-SQL, który wyœwietli w formie tekstowej (w oknie messages) co trzeciego pracownika (tabela Employees) licz¹c od koñca (tzn. od koñca tak jak s¹ wstawieni do bazy danych), 
---  	którego wiek jest pomiêdzy 2 parametrami zadanymi w definicji tych dwóch paramaterów (declare).
---		W przypadku nie podania parametru pierwszego domyœlnie ustaw 18 a w przypadku nie podania drugiego ustaw 30. 
+--	1. Zdefiniuj blok anonimowy T-SQL, ktÃ³ry wyÅ›wietli w formie tekstowej (w oknie messages) co trzeciego pracownika (tabela Employees) liczÄ…c od koÅ„ca (tzn. od koÅ„ca tak jak sÄ… wstawieni do bazy danych), 
 
+--  	ktÃ³rego wiek jest pomiÄ™dzy 2 parametrami zadanymi w definicji tych dwÃ³ch paramaterÃ³w (declare).
+--		W przypadku nie podania parametru pierwszego domyÅ›lnie ustaw 18 a w przypadku nie podania drugiego ustaw 30. 
 
---	2. Zdefiniuj blok anonimowy T-SQL, który bêdzie zwracaæ komunikat o ró¿nicy w dniach 
---		miêdzy dat¹ bie¿¹c¹ a dat¹ podan¹ w deklaracji zmiennej na pocz¹tku bloku. 
---		W przypadku tego samego dnia zwróæ komunikat o równoœci dat itd.
---		Przyk³ad:
---		'Miêdzy dat¹ obecn¹ a dat¹ 12-05-2020 13:15:22 jest XXX dni ró¿nicy.'
+declare @from int
+declare @to int = 70
+
+begin
+	if ( @from is null ) set @from = 18
+	if ( @to is null ) set @to = 30
+
+	declare c_1 scroll cursor for
+	select concat_ws( ' ', e.FirstName, e.LastName )
+	from Employees e
+	where datediff( year, e.BirthDate, getdate() ) between @from and @to
+	order by e.EmployeeID desc
+
+	declare @emp varchar(32)
+
+	open c_1
+	fetch next from c_1 into @emp
+
+	while @@fetch_status = 0
+	begin
+		print @emp
+		fetch relative 3 from c_1 into @emp
+	end
+
+	close c_1
+	deallocate c_1
+end
+go
+
+--	2. Zdefiniuj blok anonimowy T-SQL, ktÃ³ry bÄ™dzie zwracaÄ‡ komunikat o rÃ³Å¼nicy w dniach 
+--		miÄ™dzy datÄ… bieÅ¼Ä…cÄ… a datÄ… podanÄ… w deklaracji zmiennej na poczÄ…tku bloku. 
+--		W przypadku tego samego dnia zwrÃ³Ä‡ komunikat o rÃ³wnoÅ›ci dat itd.
+--		PrzykÅ‚ad:
+--		'MiÄ™dzy datÄ… obecnÄ… a datÄ… 12-05-2020 13:15:22 jest XXX dni rÃ³Å¼nicy.'
 --		lub
---		'Data podana w parametrze jest dat¹ bie¿¹c¹.'
+--		'Data podana w parametrze jest datÄ… bieÅ¼Ä…cÄ….'
 --		lub
---		'Data podana w parametrze jest wiêksza od bie¿acej.'
+--		'Data podana w parametrze jest wiÄ™ksza od bieÅ¼acej.'
 
---  3. Zdefiniuj blok anonimowy T-SQL, który poda w sekundach czas od rozpoczêcia skryptu do jego zakoñczenia (w œrodku wstawiamy dowone operacje albo funckcje, która czeka odpowiedni¹ iloœæ czasu WAITFOR)
+declare @date date = '1996-06-09'
+declare @differenceMsg nvarchar(128)
 
---  4. Zdefiniuj blok anonimowy T-SQL, który wyœwietli trzy najlepiej sprzedawane produkty i wartoœæ sprzeda¿y tych produktów, 
---  	a nastêpnie w skrypcie podaæ trzy kategoriê gdzie by³a najwieksza sprzeda¿ i jaka. Na koñcu wyswietliæ czas w ms wykonania skryptu.
+begin
+	declare @diff int = datediff( day, @date, getdate() )
+	set @differenceMsg = case 
+		when @diff < 0 
+			then 'Data podana w parametrze jest wiÄ™ksza od bieÅ¼acej.'
+		when @diff = 0
+			then 'Data podana w parametrze jest datÄ… bieÅ¼Ä…cÄ….'
+		else concat(
+			'MiÄ™dzy datÄ… obecnÄ… a datÄ… '
+			, format( @date, N'dd-MM-yyyy hh:mm:ss' )
+			, ' jest '
+			, @diff 
+			, ' dni rÃ³Å¼nicy.'
+		)
+	end
+end
 
---  5. Zdefiniuj blok anonimowy T-SQL, który sprawdzi ile sekwencji jest zdefiniowanych w danej bazie danych. Jeœli brak jest sekwencji to utworzymy 3 sekwencje o doolnych nazwach,
---		a jeœli s¹ to skasujemy wszystkie z podaniem informacji jakie by³y ich nazwy i ile zosta³o skasowanych.
+print @differenceMsg
+go
 
---  6. Zdefiniuj blok anonimowy T-SQL do obliczania wartoœci silnia z danej liczby podanej w czêœci declare. Jeœli przekroczymy zakres danego typu zmiennej to musimy obs³u¿yæ b³êdy jakie mog¹ wyst¹piæ
 
---  7. Zdefiniuj blok anonimowy T-SQL do wstawiania nowej kategorii do tabeli Categories, który sprawdzi czy nazwa kategorii istnieje czy nie. 
---     Jeœli nazwa istnieje to nale¿y zwróciæ wyj¹tek i nale¿y go obs³u¿yæ w czêœci wyjatków ³¹cznie z wycofaniem transakcji 
+--  3. Zdefiniuj blok anonimowy T-SQL, ktÃ³ry poda w sekundach czas od rozpoczÄ™cia skryptu do jego zakoÅ„czenia (w Å›rodku wstawiamy dowone operacje albo funckcje, ktÃ³ra czeka odpowiedniÄ… iloÅ›Ä‡ czasu WAITFOR)
 
+declare @end datetime
+declare @begin datetime = getdate()
+
+begin
+	waitfor delay '00:00:20'
+end
+
+set @end = getdate()
+print concat( 'Waited for ', datediff( second, @begin, @end ), ' seconds' )
+go
+
+--  4. Zdefiniuj blok anonimowy T-SQL, ktÃ³ry wyÅ›wietli trzy najlepiej sprzedawane produkty i wartoÅ›Ä‡ sprzedaÅ¼y tych produktÃ³w, 
+--  	a nastÄ™pnie w skrypcie podaÄ‡ trzy kategoriÄ™ gdzie byÅ‚a najwieksza sprzedaÅ¼ i jaka. Na koÅ„cu wyswietliÄ‡ czas w ms wykonania skryptu.
+
+declare @end datetime
+declare @begin datetime = getdate()
+
+begin
+	declare c_4_1 cursor for
+	select 
+		concat(
+				'Product ['
+				, p.ProductName 
+				, '] with value ['
+				, sum( od.UnitPrice * od.Quantity )
+				, ']'
+		) v
+	from [Order Details] od
+	inner join Products p
+		on od.ProductID = p.ProductID
+	group by ProductName
+	order by sum( od.UnitPrice * od.Quantity )
+
+	declare c_4_2 cursor for
+	select 
+		concat(
+				'Category ['
+				, c.CategoryName 
+				, '] with value ['
+				, sum( od.UnitPrice * od.Quantity )
+				, ']'
+		) v
+	from [Order Details] od
+	inner join Products p
+		on od.ProductID = p.ProductID
+	inner join Categories c
+		on p.CategoryID = c.CategoryID
+	group by CategoryName
+	order by sum( od.UnitPrice * od.Quantity )
+
+
+	declare @v nvarchar(128)
+	declare @i int = 0
+
+	open c_4_1
+
+	while @i < 3
+	begin
+		fetch next from c_4_1 into @v
+		if @@fetch_status = 0
+		begin
+			print @v
+		end
+		set @i = @i + 1
+	end
+
+	close c_4_1
+	deallocate c_4_1
+
+	set @i = 0
+	open c_4_2
+
+	while @i < 3
+	begin
+		fetch next from c_4_2 into @v
+		if @@fetch_status = 0
+		begin
+			print @v
+		end
+		set @i = @i + 1
+	end
+
+	close c_4_2 deallocate c_4_2
+end
+
+set @end = getdate()
+print concat( 'Waited for ', datediff( millisecond, @begin, @end ), ' ms' )
+go
+
+--  5. Zdefiniuj blok anonimowy T-SQL, ktÃ³ry sprawdzi ile sekwencji jest zdefiniowanych w danej bazie danych. JeÅ›li brak jest sekwencji to utworzymy 3 sekwencje o doolnych nazwach,
+--		a jeÅ›li sÄ… to skasujemy wszystkie z podaniem informacji jakie byÅ‚y ich nazwy i ile zostaÅ‚o skasowanych.
+
+begin 
+	declare @seq_no int
+	select @seq_no = count(*) 
+	from Northwind.INFORMATION_SCHEMA.SEQUENCES
+
+	if @seq_no > 0
+	begin
+		print concat(
+			'There were '
+			, @seq_no
+			, ' sequences'
+		)
+
+		declare c_5 cursor for
+		select SEQUENCE_NAME
+		from Northwind.INFORMATION_SCHEMA.SEQUENCES
+
+		declare @name varchar(128)
+		declare @sql varchar(1024)
+
+		open c_5
+		fetch next from c_5 into @name
+
+		while @@fetch_status = 0
+		begin
+			print concat( 
+				'Sequence named: '
+				, @name
+			)
+			set @sql = concat(
+				'drop sequence if exists '
+				, @name
+			)
+			exec( @sql )
+			fetch next from c_5 into @name
+		end
+
+		close c_5 deallocate c_5
+	end
+	else 
+	begin
+		create sequence s_int as int
+		create sequence s_bigint as bigint
+		create sequence s_tinyint as tinyint
+	end
+end
+go
+
+--  6. Zdefiniuj blok anonimowy T-SQL do obliczania wartoÅ›ci silnia z danej liczby podanej w czÄ™Å›ci declare. JeÅ›li przekroczymy zakres danego typu zmiennej to musimy obsÅ‚uÅ¼yÄ‡ bÅ‚Ä™dy jakie mogÄ… wystÄ…piÄ‡
+
+declare @num int = 22
+begin
+	declare @fact bigint = 1
+
+	if @num < 0 print concat(
+		'Cannot calculate factorial of negative number '
+		, @num
+	)
+	else begin
+		begin try
+			declare @i int = 1
+			while @i < @num
+			begin
+				set @fact = @fact * @i
+				set @i = @i + 1
+			end
+
+			print concat(
+				'Factorial of '
+				, @num
+				, ' is '
+				, @fact
+			)
+		end try
+		begin catch
+			print concat(
+				'Number '
+				, @num
+				, ' is too big for factorial calculation'
+			)
+			print ERROR_MESSAGE()
+		end catch
+	end
+end
+go
+
+--  7. Zdefiniuj blok anonimowy T-SQL do wstawiania nowej kategorii do tabeli Categories, ktÃ³ry sprawdzi czy nazwa kategorii istnieje czy nie. 
+--     JeÅ›li nazwa istnieje to naleÅ¼y zwrÃ³ciÄ‡ wyjÄ…tek i naleÅ¼y go obsÅ‚uÅ¼yÄ‡ w czÄ™Å›ci wyjatkÃ³w Å‚Ä…cznie z wycofaniem transakcji 
+
+declare @cat_name nvarchar(15) = 'Cat1'
+begin
+	begin tran
+	
+	begin try
+		if exists ( select CategoryName
+			from Categories
+			where CategoryName = @cat_name
+		) throw 123456, 'Category with specified name already exists', 1
+
+		insert into Categories ( CategoryName )
+		values ( @cat_name )
+
+		commit tran
+	end try
+	begin catch
+		print 'Cannot insert category due to errors'
+		print ERROR_MESSAGE()
+		rollback tran
+	end catch
+end
