@@ -263,8 +263,12 @@ GO
 -- Wywołanie procedury w bloku CATCH
 BEGIN TRY
 
-  INSERT INTO dbo.Employees(EmployeeID, LastName, ReportsTo)
-    VALUES(1, 'Emp1', NULL);
+  INSERT INTO dbo.Employees(
+  --EmployeeID,
+  LastName, ReportsTo)
+    VALUES(
+	--1,
+	'Emp1', NULL);
 
 END TRY
 BEGIN CATCH
@@ -352,22 +356,314 @@ GO
 -- Zadania --
 
 ------PROCEDURE
+
+
 -- 1. Zdefiniuj procedurę, która wyświetli na ekranie imię, nazwisko oraz państwo pochodzenia (Country) o identyfikatorze podanym jako pierwszy parametr. Jeżeli nie ma takiego id to zwrócony zostanie informacja a braku takiego pracownika.
+
+drop proc if exists p_1
+go
+create proc p_1
+	@emp_id int = 0
+as
+	if exists (
+		select e.EmployeeID 
+		from Employees e 
+		where e.EmployeeID = @emp_id
+	) begin
+		select
+			e.FirstName
+			, e.LastName
+			, e.Country
+		from Employees e
+		where e.EmployeeID = @emp_id
+	end
+	else print concat( 'No such employee with ID= ', @emp_id )
+go
+
+exec p_1 1
+go
+exec p_1 
+go
+
+
 -- 1A. j.w dodatkowo procedura poda różnicę w latach pomędzy datą urodzenia pracownika a datą jego zatrudnienia.
+
+drop proc if exists p_1a
+go
+create proc p_1a
+	@emp_id int = 0
+as
+	if exists (
+		select e.EmployeeID 
+		from Employees e 
+		where e.EmployeeID = @emp_id
+	) begin
+		select
+			e.FirstName
+			, e.LastName
+			, e.Country
+			, datediff( year, e.BirthDate, e.HireDate ) [Age on Hire Date]
+		from Employees e
+		where e.EmployeeID = @emp_id
+	end
+	else print concat( 'No such employee with ID: ', @emp_id )
+go
+
+exec p_1a 1
+go
+exec p_1a 
+go
+
+
 -- 2. Zdefiniować procedurę, która zwróci liczbę zatrudnionych wszystkich pracowników.
+
+drop proc if exists p_2
+go
+create proc p_2
+	@emp_no int out
+as
+	select @emp_no = count( * )
+	from Employees
+go
+
+declare @num int
+exec p_2 @num out
+print concat( 'Number of employees: ', @num )
+go
+
+
 -- 3. Zdefiniować procedurę, która zwróci liczbę produktów w danej kategorii podanej jako pierwszy parametr. Parametr drugi typu OUT zwróci liczbę produktów.
 
+drop proc if exists p_3
+go
+create proc p_3
+	@cat_id int
+	, @prod_no int out
+as
+	select @prod_no = count( * )
+	from Products p
+	where p.CategoryID = @cat_id
+go
+
+declare @num int
+exec p_3 1, @num out
+print concat( 'Number of products: ', @num )
+go
+
+
 ------FUNCTION
+
+
 -- 1. Zdefiniować funkcję, która wycina spacje na początku i końcu zmiennej typu VARCHAR i zwraca to co zostanie.
+
+drop function if exists f_1
+go
+create function f_1(
+	@str varchar(1024)
+) returns varchar(1024)
+begin
+	return trim( @str )
+end
+go
+
+print '[' + dbo.f_1( '        Hello world!        ' ) + ']'
+go
+
+
 -- 2. Zdefiniować funkcję, która dla categoryid zwraca wartość średnią z wszystkich produktów w tej kategorii
+
+drop function if exists f_2
+go
+create function f_2(
+	@cat_id int
+) returns float
+begin
+	declare @prod_no int
+
+	select @prod_no = avg( p.UnitPrice * p.UnitsInStock )
+	from Products p
+	where p.CategoryID = @cat_id
+
+	return @prod_no
+end
+go
+
+select
+	c.CategoryID
+	, dbo.f_2( c.CategoryID ) [Average value of stock]
+from Categories c
+go
+
+
 -- 3. Zdefiniować funkcję, która dla categoryname zwraca wartość średnią z wszystkich produktów w tej kategorii
+
+drop function if exists f_3
+go
+create function f_3(
+	@cat_name nvarchar(15)
+) returns float
+begin
+	declare @prod_no int
+
+	select @prod_no = avg( p.UnitPrice * p.UnitsInStock )
+	from Products p
+	inner join Categories c
+		on p.CategoryID = c.CategoryID
+	where c.CategoryName = @cat_name
+
+	return @prod_no
+end
+go
+
+select
+	c.CategoryName
+	, dbo.f_3( c.CategoryName ) [Average value of stock]
+from Categories c
+go
+
+
 -- 4. Zdefiniować funkcję do konewrsji typu date na string postaci YYYY-MM-DD.
+
+drop function if exists f_4
+go
+create function f_4(
+	@date date
+) returns char(10)
+begin
+	return concat_ws(
+		'-'
+		, format( year( @date ), 'D4' )
+		, format( month( @date ), 'D2' )
+		, format( day( @date ), 'D2' )
+	)
+end 
+go
+
+select dbo.f_4( getdate() )
+go
+
+
 -- 5. Zdefiniować funkcję, która zwraca z daty podanej jako parametr wejściowy dzień tygodnia w języku polskim.
+
+drop function if exists f_5
+go
+create function f_5(
+	@date date
+) returns varchar(15)
+begin
+	return case datepart( dw, @date )
+	when 2 then 'poniedziałek'
+	when 3 then 'wtorek'
+	when 4 then 'środa'
+	when 5 then 'czwartek'
+	when 6 then 'piątek'
+	when 7 then 'sobota'
+	else 'niedziela'
+	end
+end 
+go
+
+select dbo.f_5( getdate() )
+go
+
 -- 6. Zdefiniować funkcję z trzema parametrami, która sprawdzi czy dane boki tworzą trójąt, a jeśli tak to obliczyć jego pole.
+
+drop function if exists f_6
+go
+create function f_6(
+	@a float
+	, @b float
+	, @c float
+) returns float
+begin
+	return case
+		when @a + @b > @c
+				and @a + @c > @b
+				and @b + @c > @a
+			then sqrt(
+				4 * @a * @a * @b * @b
+				- power( @a * @a + @b * @b - @c * @c, 2 )
+			) / 4.0
+		else -1
+	end
+end 
+go
+
+select dbo.f_6(3, 4, 5)
+select dbo.f_6(1, 1, 3)
+go
+
+
 -- 7. Zdefiniować funkcję zamieniajacą wszystkie spacje podkreśleniem.
+
+drop function if exists f_7
+go
+create function f_7(
+	@str varchar(1024)
+) returns varchar(1024)
+begin
+	return replace( @str, ' ', '_' ) 
+end 
+go
+
+select dbo.f_7( 'Hello There. General Kenobi!' )
+go
+
+
 -- 8. Zdefiniować funkcję do odwracania stringu.
+
+drop function if exists f_8
+go
+create function f_8(
+	@str varchar(1024)
+) returns varchar(1024)
+begin
+	return reverse( @str )
+end 
+go
+
+select dbo.f_8( 'coffee' )
+go
+
+
 -- 9. Zdefiniować funkcję, która sprawdza czy dana liczba całkowita jest parzysta czy nieparzysta i zwraca wartość 'Parzysta' lub 'Nieparzysta'.
+
+drop function if exists f_9
+go
+create function f_9(
+	@num int
+) returns varchar(12)
+begin
+	return iif( @num % 2 = 0, 'Parzysta', 'Nieparzysta' )
+end 
+go
+
+select dbo.f_9( 1 )
+select dbo.f_9( 2 )
+go
+
+
 --10. Zdefiniować funkcję do obliczenia wartości silnia z liczby całkowitej (zdefiniować obsługę błędów w przypadku liczb mniejszych od 1 i takich, które przekroczą zakres wykorzystywaneo typu.
+
+drop function if exists f_10
+go
+create function f_10(
+	@num int
+) returns bigint
+begin
+	return case
+		when @num < 0 then -1
+		when @num > 20 then -2
+		when @num = 0 then 1
+		when @num = 1 then 1
+		else @num * dbo.f_10( @num - 1)
+	end
+end 
+go
+
+select dbo.f_10( 13 )
+go
+
 
 ------------------------------------
 -- Dla chętnych dodatkowe zadanie --
